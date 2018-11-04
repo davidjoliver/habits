@@ -5,7 +5,7 @@
     = f.text_field :name, class: "horizontal"
   .field_group
     = f.label :habit_type, class: "horizontal"
-    = f.text_field :habit_type, class: "horizontal"
+    = f.select :habit_type, [["Don't do it", "dont-do-it"], ["Do it","do-it"]]
   .submit
     = f.submit
 
