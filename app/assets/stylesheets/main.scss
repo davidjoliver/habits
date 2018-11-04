@@ -21,6 +21,10 @@ a { text-decoration: none !important; }
   margin-top: 20px;
 }
 
+h1 {
+  color: #1C437E;
+}
+
 input[type="submit"] {
   background-color: #1C437E;
   border: none;
@@ -33,4 +37,8 @@ input[type="submit"] {
 
 ul.no-style {
   list-style: none;
+}
+
+.indent {
+  margin-left: 10px;
 }

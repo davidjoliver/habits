@@ -10,6 +10,7 @@ class HabitsController < ApplicationController
 
   def index
     @habits = Habit.all
+    @today_date = Date.today.strftime("%Y-%m-%d")
   end
 
   private
