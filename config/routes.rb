@@ -1,4 +1,4 @@
 Rails.application.routes.draw do
   resources :habits
-  root to: "habits#new"
+  root to: "habits#index"
 end
