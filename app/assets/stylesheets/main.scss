@@ -16,3 +16,17 @@ a { text-decoration: none !important; }
   height: auto;
   padding: 20px;
 }
+
+.submit {
+  margin-top: 20px;
+}
+
+input[type="submit"] {
+  background-color: #1C437E;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: bold;
+  padding: 15px 32px;
+}

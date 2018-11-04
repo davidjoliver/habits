@@ -1,1 +1,11 @@
-Hi there
+%h2 New Habit to Track
+= form_for @habit do |f|
+  .field_group
+    = f.label :name, class: "horizontal"
+    = f.text_field :name, class: "horizontal"
+  .field_group
+    = f.label :habit_type, class: "horizontal"
+    = f.text_field :habit_type, class: "horizontal"
+  .submit
+    = f.submit
+
