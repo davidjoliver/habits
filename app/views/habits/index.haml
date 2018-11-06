@@ -6,8 +6,9 @@
     %li
       %span{class: "#{habit.habit_type} tag"}
         = habit.habit_type
-      = habit.name
-      = link_to habit_records_path(habit_id: habit.id, crushed_on: DateTime.now), method: :post do
-        = icon "fas", "fist-raised"
-      = link_to habit_records_path(habit_id: habit.id, missed_on: DateTime.now), method: :post do
-        = icon "far", "flushed"
+      %span.habit-in-list
+        = habit.name
+      = link_to habit_records_path(habit_id: habit.id, checked_in_on: DateTime.now, check_in_type: "crushed"), method: :post, class: "check-in" do
+        = icon "fas", "fist-raised", class: "crushed"
+      = link_to habit_records_path(habit_id: habit.id, checked_in_on: DateTime.now, check_in_type: "missed"), method: :post, class: "check-in" do
+        = icon "far", "flushed", class: "missed"

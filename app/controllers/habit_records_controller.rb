@@ -1,9 +1,9 @@
 class HabitRecordsController < ApplicationController
   def create
-    HabitRecord.create(habit_id: params[:habit_id],
-                       crushed_on: params[:crushed_on],
-                       missed_on: params[:missed_on])
-    redirect_to habits_path
+    @record = HabitRecord.create(habit_id: params[:habit_id],
+                       checked_in_on: params[:checked_in_on],
+                       check_in_type: params[:check_in_type])
+    redirect_to habits_path, notice: @record.errors
   end
 
   private

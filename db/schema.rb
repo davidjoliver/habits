@@ -14,8 +14,8 @@ ActiveRecord::Schema.define(version: 2018_11_05_111828) do
 
   create_table "habit_records", force: :cascade do |t|
     t.integer "habit_id"
-    t.datetime "crushed_on"
-    t.datetime "missed_on"
+    t.datetime "checked_in_on"
+    t.string "check_in_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
