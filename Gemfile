@@ -11,8 +11,10 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'capistrano-rails', group: :development
 gem 'haml'
+gem 'font-awesome-sass', '~> 5.5.0'
 
 group :development, :test do
+  gem 'pry'
 end
 
 group :development do
