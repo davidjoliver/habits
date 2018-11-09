@@ -19,9 +19,11 @@ RSpec.describe StreakManager do
   end
 
   context "when checking in" do
-    it "starts a streak" do
-      manager.check_in(check_in_type: "crushed")
-      expect(habit.streaks.running.count).to eq 1
+    context "when there has never been a streak" do
+      it "starts a streak" do
+        manager.check_in(check_in_type: "crushed")
+        expect(habit.streaks.running.count).to eq 1
+      end
     end
   end
 end

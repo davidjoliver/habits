@@ -15,7 +15,7 @@ RSpec.describe HabitsController do
     expect(page).to have_content "can only be done once per day"
   end
 
-  it "shows a counter of days in habit" do
+  xit "shows a counter of days in habit" do
     habit = Habit.create(name: "Something to crush")
     Timecop.freeze(1.day.ago) do
       visit habits_path
