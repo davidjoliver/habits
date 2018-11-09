@@ -12,6 +12,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'capistrano-rails', group: :development
 gem 'haml'
 gem 'font-awesome-sass', '~> 5.5.0'
+gem 'mysql2'
 
 group :development, :test do
   gem 'pry'
