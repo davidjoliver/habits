@@ -3,7 +3,7 @@
 %h3.indent= @today_date
 %ul.no-style
   - @habits.each do |habit|
-    %li
+    %li{id: habit.id}
       %span{class: "#{habit.habit_type} tag"}
         = habit.habit_type
       %span.habit-in-list
@@ -12,3 +12,4 @@
         = icon "fas", "fist-raised", class: "crushed"
       = link_to habit_records_path(habit_id: habit.id, checked_in_on: DateTime.now, check_in_type: "missed"), method: :post, class: "check-in" do
         = icon "far", "flushed", class: "missed"
+      = "Going for #{habit.streak}"

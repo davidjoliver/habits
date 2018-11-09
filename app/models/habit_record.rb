@@ -1,4 +1,5 @@
 class HabitRecord < ApplicationRecord
+  belongs_to :habit
   validate :only_one_check_in_per_day, on: :create
 
   def only_one_check_in_per_day
