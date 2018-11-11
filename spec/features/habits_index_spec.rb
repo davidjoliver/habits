@@ -5,22 +5,22 @@ RSpec.describe HabitsController do
     habit = Habit.create(name: "Something to crush")
     visit habits_path
 
-    within("##{habit.id}") do
+    within("#habit#{habit.id}") do
       all(".check-in").first.click
     end
 
-    within("##{habit.id}") do
+    within("#habit#{habit.id}") do
       all(".check-in").first.click
     end
     expect(page).to have_content "can only be done once per day"
   end
 
-  xit "shows a counter of days in habit" do
+  it "shows a counter of days in habit" do
     habit = Habit.create(name: "Something to crush")
     Timecop.freeze(1.day.ago) do
       visit habits_path
 
-      within("##{habit.id}") do
+      within("#habit#{habit.id}") do
         all(".check-in").first.click
       end
     end
@@ -28,7 +28,7 @@ RSpec.describe HabitsController do
     Timecop.freeze(Date.today) do
       visit habits_path
 
-      within("##{habit.id}") do
+      within("#habit#{habit.id}") do
         all(".check-in").first.click
       end
     end
