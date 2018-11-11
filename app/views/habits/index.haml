@@ -10,6 +10,4 @@
         = habit.name
       = link_to habit_check_in_path(habit_id: habit.id, checked_in_on: DateTime.now, check_in_type: "crushed"), method: :post, class: "check-in" do
         = icon "fas", "fist-raised", class: "crushed"
-      = link_to habit_check_in_path(habit_id: habit.id, checked_in_on: DateTime.now, check_in_type: "missed"), method: :post, class: "check-in" do
-        = icon "far", "flushed", class: "missed"
       = "Going for #{habit.current_streak_count} days"
