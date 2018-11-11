@@ -1,7 +1,5 @@
 require 'rails_helper'
 
-require 'rails_helper'
-
 RSpec.describe StreakManager do
   let(:habit) { Habit.create(name: "Something I want to start doing") }
   let(:manager) {  StreakManager.new(habit: habit) }
@@ -44,6 +42,33 @@ RSpec.describe StreakManager do
         Timecop.freeze(2.days.ago) { manager.check_in(check_in_type: "crushed") }
         Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
         expect(habit.current_streak_count).to eq 3
+      end
+
+      it "has been running for four days" do
+        Timecop.freeze(8.days.ago) { manager.check_in(check_in_type: "crushed") }
+        Timecop.freeze(7.days.ago) { manager.check_in(check_in_type: "crushed") }
+        Timecop.freeze(6.days.ago) { manager.check_in(check_in_type: "crushed") }
+        Timecop.freeze(5.days.ago) { manager.check_in(check_in_type: "crushed") }
+        expect(habit.current_streak_count).to eq 4
+      end
+
+      context "when missing a day" do
+        it "has been running for one day" do
+          Timecop.freeze(3.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
+          expect(habit.current_streak_count).to eq 1
+        end
+
+        it "has been running for three days" do
+          Timecop.freeze(8.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(7.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(6.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(5.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(3.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(2.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
+          expect(habit.current_streak_count).to eq 3
+        end
       end
     end
   end
