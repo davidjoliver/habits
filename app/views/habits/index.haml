@@ -3,6 +3,7 @@
 %h3.indent= @today_date
 %ul.no-style
   - @habits.each do |habit|
+    - streak_manager = StreakManager.new(habit: habit)
     %li{id: "habit#{habit.id}"}
       %span{class: "#{habit.habit_type} tag"}
         = habit.habit_type
@@ -10,4 +11,4 @@
         = habit.name
       = link_to habit_check_in_path(habit_id: habit.id, checked_in_on: DateTime.now, check_in_type: "crushed"), method: :post, class: "check-in" do
         = icon "fas", "fist-raised", class: "crushed"
-      = "Going for #{habit.current_streak_count} days"
+      = "Going for #{streak_manager.current_streak_count} days"

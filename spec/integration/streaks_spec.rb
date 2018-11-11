@@ -4,6 +4,14 @@ RSpec.describe StreakManager do
   let(:habit) { Habit.create(name: "Something I want to start doing") }
   let(:manager) {  StreakManager.new(habit: habit) }
 
+  describe "for current streak count" do
+    context "when there is no current streak" do
+      it "just returns zero" do
+        expect(manager.current_streak_count).to eq 0
+      end
+    end
+  end
+
   it "Records the check in" do
     expect { manager.check_in(check_in_type: "crushed") }
       .to change { habit.habit_records.where(check_in_type: "crushed").count }
@@ -34,29 +42,27 @@ RSpec.describe StreakManager do
       it "has been running for two days" do
         Timecop.freeze(2.days.ago) { manager.check_in(check_in_type: "crushed") }
         Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
-        expect(habit.current_streak_count).to eq 2
+        expect(manager.current_streak_count).to eq 2
       end
 
       it "has been running for three days" do
         Timecop.freeze(3.days.ago) { manager.check_in(check_in_type: "crushed") }
         Timecop.freeze(2.days.ago) { manager.check_in(check_in_type: "crushed") }
         Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
-        expect(habit.current_streak_count).to eq 3
-      end
-
-      it "has been running for four days" do
-        Timecop.freeze(8.days.ago) { manager.check_in(check_in_type: "crushed") }
-        Timecop.freeze(7.days.ago) { manager.check_in(check_in_type: "crushed") }
-        Timecop.freeze(6.days.ago) { manager.check_in(check_in_type: "crushed") }
-        Timecop.freeze(5.days.ago) { manager.check_in(check_in_type: "crushed") }
-        expect(habit.current_streak_count).to eq 4
+        expect(manager.current_streak_count).to eq 3
       end
 
       context "when missing a day" do
+        it "has been running for zero days" do
+          Timecop.freeze(3.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(2.days.ago) { manager.check_in(check_in_type: "crushed") }
+          expect(manager.current_streak_count).to eq 0
+        end
+
         it "has been running for one day" do
           Timecop.freeze(3.days.ago) { manager.check_in(check_in_type: "crushed") }
           Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
-          expect(habit.current_streak_count).to eq 1
+          expect(manager.current_streak_count).to eq 1
         end
 
         it "has been running for three days" do
@@ -67,7 +73,7 @@ RSpec.describe StreakManager do
           Timecop.freeze(3.days.ago) { manager.check_in(check_in_type: "crushed") }
           Timecop.freeze(2.days.ago) { manager.check_in(check_in_type: "crushed") }
           Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
-          expect(habit.current_streak_count).to eq 3
+          expect(manager.current_streak_count).to eq 3
         end
       end
 
@@ -75,7 +81,7 @@ RSpec.describe StreakManager do
         it "has been running for one day" do
           Timecop.freeze(5.days.ago) { manager.check_in(check_in_type: "crushed") }
           Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
-          expect(habit.current_streak_count).to eq 1
+          expect(manager.current_streak_count).to eq 1
         end
 
         it "has been running for two days" do
@@ -83,7 +89,7 @@ RSpec.describe StreakManager do
           Timecop.freeze(6.days.ago) { manager.check_in(check_in_type: "crushed") }
           Timecop.freeze(2.days.ago) { manager.check_in(check_in_type: "crushed") }
           Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
-          expect(habit.current_streak_count).to eq 2
+          expect(manager.current_streak_count).to eq 2
         end
       end
     end
