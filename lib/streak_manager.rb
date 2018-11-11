@@ -21,8 +21,4 @@ class StreakManager
   def start_streak(streak)
     streak.update(start_date: DateTime.now)
   end
-
-  def current_streak_count
-    habit.current_streak_count
-  end
 end
