@@ -70,6 +70,22 @@ RSpec.describe StreakManager do
           expect(habit.current_streak_count).to eq 3
         end
       end
+
+      context "when missing three days" do
+        it "has been running for one day" do
+          Timecop.freeze(5.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
+          expect(habit.current_streak_count).to eq 1
+        end
+
+        it "has been running for two days" do
+          Timecop.freeze(7.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(6.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(2.days.ago) { manager.check_in(check_in_type: "crushed") }
+          Timecop.freeze(1.days.ago) { manager.check_in(check_in_type: "crushed") }
+          expect(habit.current_streak_count).to eq 2
+        end
+      end
     end
   end
 end
