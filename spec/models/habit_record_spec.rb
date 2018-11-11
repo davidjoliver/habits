@@ -11,4 +11,14 @@ RSpec.describe HabitRecord do
     expect(valid).to be_valid
     expect(invalid).to_not be_valid
   end
+
+  it "allows checking in two habits on the same day" do
+    second_habit = Habit.create(name: "second habit")
+    today = DateTime.now
+    also_today = today + 1.hour
+    valid = HabitRecord.create(checked_in_on: today, habit: habit)
+    also_valid = HabitRecord.create(checked_in_on: also_today, habit: second_habit)
+    expect(valid).to be_valid
+    expect(also_valid).to be_valid
+  end
 end
