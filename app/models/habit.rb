@@ -1,4 +1,4 @@
 class Habit < ApplicationRecord
-  has_many :habit_records
+  has_many :check_ins
   has_many :streaks
 end

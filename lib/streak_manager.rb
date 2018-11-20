@@ -3,7 +3,7 @@ class StreakManager
 
   def initialize(habit:)
     @habit = habit
-    @check_ins = habit.habit_records.load
+    @check_ins = habit.check_ins.load
     @errors = []
   end
 
