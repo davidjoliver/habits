@@ -12,3 +12,4 @@
       = link_to habit_check_in_path(habit_id: habit.id, checked_in_on: DateTime.now, check_in_type: "crushed"), method: :post, class: "check-in" do
         = icon "fas", "fist-raised", class: "crushed"
       = "Going for #{streak_manager.current_streak_count} days"
+      = render partial: "badges", locals: { habit: habit }

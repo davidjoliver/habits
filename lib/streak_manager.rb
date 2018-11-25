@@ -12,6 +12,7 @@ class StreakManager
       start_streak
     end
     check_in = check_ins.create(checked_in_on: DateTime.now, check_in_type: check_in_type)
+    BadgeLogic.new(habit: habit).maybe_award_badge
     errors << check_in.errors unless check_in.valid?
   end
 
